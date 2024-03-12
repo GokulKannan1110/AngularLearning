@@ -1,0 +1,113 @@
+<div class="wrapper">
+    <!-- <app-nav></app-nav> -->
+    <!-- <div app-nav></div> -->
+    <div class = "app-nav"></div>
+    <app-header setBackground></app-header>
+    <app-notification></app-notification>    
+    <app-products></app-products>
+    <br>
+    <app-customer-list #customer></app-customer-list>
+    <p>You have selected {{customer?.selectedCustomer?.name}}</p>
+    <br>
+    <div appHover>
+        <label>DOB: </label>
+        <!-- Blur event occurs when we move away from the element -->
+        <input type="date" #dobInput (blur)="calculateAge()">
+    </div>
+    <div>
+        <label>Age: </label>
+        <input type="text" #ageInput>
+    </div>     
+    <app-demo></app-demo>
+    {{hello}}
+
+    <br>
+    <h2>ng-content Example</h2>
+    <div class="container">
+        <h2>New in Smart Phones</h2>
+      
+        <div class="more-products">
+            <!-- <div class="card">
+                <h4 class="title">New in iPhone</h4>
+                <p class="summary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <button class="btn btn-more">Show more in iPhone</button>
+            </div>
+            <div class="card">
+                <h4 class="title">New in Samsung</h4>
+                <p class="summary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <button class="btn btn-more">Show more in Samsung</button>
+            </div>
+            <div class="card">
+                <h4 class="title">New in OnePlus</h4>
+                <p class="summary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <button class="btn btn-more">Show more in OnePlus</button>
+            </div>
+            <div class="card">
+                <h4 class="title">New in MI</h4>
+                <p class="summary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <button class="btn btn-more">Show more in MI</button>
+            </div> -->
+            <app-content-product>
+                <h4 class="title" #iPhoneTitle setBackground>New in iPhone</h4>
+                <button class="btn btn-more">Show more in iPhone</button>
+            </app-content-product>
+            <app-content-product>
+                <h4 class="title" appHighlight appHover>New in Samsung</h4>
+                <button class="btn btn-more">Show more in Samsung</button>
+            </app-content-product>
+            <app-content-product>
+                <h4 class="title">New in OnePlus</h4>
+                <button class="btn btn-more">Show more in OnePlus</button>
+            </app-content-product>
+            <app-content-product>
+                <h4 class="title">New in Redmi</h4>
+                <button class="btn btn-more">Show more in Redmi</button>
+            </app-content-product>
+        </div>
+      </div>
+      <br><br>
+      <div class="container" setBackground appHover>
+        <p>This is a demo HTML content to understand custom attribute directive in Angular.</p>
+      </div>
+      
+      <div appHighlight appHover>
+        <p>This is a demo HTML content to understand custom attribute directive in Angular.</p>
+      </div>
+      
+      <div class="container" [appBetterhighlight] = "'red'" [defaultColor] = "'yellow'">
+        <p>This is a demo HTML content to understand &#64;HostBinding in Angular.</p>
+      </div>
+
+      <!-- <div [ngClass] = "{class1: condition1, class2: condition2}"> -->
+      <div [appClass] ="{container: true, 'change-font': true}"> 
+        <p>This is a demo HTML content to understand how to create custom ngClass directive in Angular.</p>
+      </div>
+      <br><br>
+      <h4>Conditional Directive Example</h4>
+      <div class="videocardcontainer">
+        <div class="video-container" *ngFor="let video of videos">
+          <div class="video-card" [appContainerHighlight] = "video.likes == mostlikedVideo.likes">
+              <div>
+                  <img [src]="video.thumbnail" style="width:220px; height:210px;">
+              </div>
+              <div><h4>{{video.title}}</h4></div>
+              <div class="details">
+                  <div class="video-data">
+                    <i class="material-icons">thumb_up</i>{{video.likes}}
+                  </div>
+                  <div class="video-data">
+                    <i class="material-icons">thumb_down</i>{{video.dislikes}}
+                  </div>
+                  <div class="video-data">
+                    <i class="material-icons">reply_all</i>{{video.share}}
+                  </div>
+              </div>
+          </div>
+      </div> 
+    </div> 
+
+</div>

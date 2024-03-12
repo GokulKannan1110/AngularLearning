@@ -1,0 +1,11 @@
+<div class="search-div" [ngClass]="{changeBackground : searchValue != '' }">
+    <span><b>Search : </b></span>
+    <!-- <input type="text" (input) ="changeSearchValue($event)"> -->
+    <!-- Here we have used two way data binding and event binding and template ref variable -->
+    <input type="text" [(ngModel)]="searchValue" (input)="onSearchTextChanged()" #tempVariable (keyup)="0">
+    <span *ngIf="searchValue != ''">You searched for "{{searchValue}}"</span>
+    <!-- This will wokr when we use that (Keyup) event. 
+    this is because only using this angular will have change detection and updates the view -->
+    <p>{{tempVariable.value}}</p>
+    <button (click)="sayHello(tempVariable)">Say Hello!</button>
+</div>
