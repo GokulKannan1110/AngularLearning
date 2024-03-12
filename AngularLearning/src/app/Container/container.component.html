@@ -90,7 +90,7 @@
       <h4>Conditional Directive Example</h4>
       <div class="videocardcontainer">
         <div class="video-container" *ngFor="let video of videos">
-          <div class="video-card" [appContainerHighlight] = "video.likes == mostlikedVideo.likes">
+          <div class="video-card">
               <div>
                   <img [src]="video.thumbnail" style="width:220px; height:210px;">
               </div>
