@@ -5,7 +5,7 @@ import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
 })
 export class HighlightDirective implements OnInit {
 
-  //When we add private keyword, angular creates private property which can be accessed within the class
+  //When we add private keyword, TYPESCRIPT creates private property which can be accessed within the class
   constructor(private element: ElementRef, private renderer: Renderer2) { }
 
   ngOnInit()

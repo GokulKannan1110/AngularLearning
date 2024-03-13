@@ -70,6 +70,8 @@
         </div>
       </div>
       <br><br>
+
+      <h4>Directives Examples(using HostBinding and HostListener decorators)</h4>
       <div class="container" setBackground appHover>
         <p>This is a demo HTML content to understand custom attribute directive in Angular.</p>
       </div>
@@ -78,6 +80,7 @@
         <p>This is a demo HTML content to understand custom attribute directive in Angular.</p>
       </div>
       
+      <!-- Custom Property Binding on Directives -->
       <div class="container" [appBetterhighlight] = "'red'" [defaultColor] = "'yellow'">
         <p>This is a demo HTML content to understand &#64;HostBinding in Angular.</p>
       </div>
@@ -86,11 +89,16 @@
       <div [appClass] ="{container: true, 'change-font': true}"> 
         <p>This is a demo HTML content to understand how to create custom ngClass directive in Angular.</p>
       </div>
+
+      <div class="container" appStyle [setStyle] ="{background: 'pink', color: 'white'}"> 
+        <p>This is a demo HTML content to understand how to create custom ngStyle directive in Angular.</p>
+      </div>
+
       <br><br>
       <h4>Conditional Directive Example</h4>
       <div class="videocardcontainer">
         <div class="video-container" *ngFor="let video of videos">
-          <div class="video-card">
+          <div class="video-card" [appContainerhighlight] = "video.likes === mostlikedVideo.likes">
               <div>
                   <img [src]="video.thumbnail" style="width:220px; height:210px;">
               </div>
