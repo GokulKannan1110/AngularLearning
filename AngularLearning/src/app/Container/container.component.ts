@@ -57,4 +57,10 @@ export class ContainerComponent implements AfterViewInit{
     let videoCopy = [...this.videos];
     return videoCopy.sort((curr, next) => next.likes - curr.likes)[0];
   }
+
+  active: boolean = false; 
+  display: boolean = false;
+  DisplayNotice(){
+    this.display=true;
+  }
 }

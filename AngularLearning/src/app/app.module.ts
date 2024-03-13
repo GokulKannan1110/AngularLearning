@@ -21,6 +21,7 @@ import { BetterhighlightDirective } from './CustomDirectives/betterhighlight.dir
 import { ClassDirective } from './CustomDirectives/class.directive';
 import { ContainerhighlightDirective } from './CustomDirectives/containerhighlight.directive';
 import { StyleDirective } from './CustomDirectives/style.directive';
+import { IfDirective } from './CustomDirectives/if.directive';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { StyleDirective } from './CustomDirectives/style.directive';
     BetterhighlightDirective,
     ClassDirective,
     ContainerhighlightDirective,
-    StyleDirective,    
+    StyleDirective,
+    IfDirective,    
   ],
   imports: [
     BrowserModule,

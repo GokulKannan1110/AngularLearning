@@ -90,7 +90,7 @@
         <p>This is a demo HTML content to understand how to create custom ngClass directive in Angular.</p>
       </div>
 
-      <div class="container" appStyle [setStyle] ="{background: 'pink', color: 'white'}"> 
+      <div class="container" appStyle [setStyle] ="{background: active ? 'Green' : 'pink', color: 'white'}"> 
         <p>This is a demo HTML content to understand how to create custom ngStyle directive in Angular.</p>
       </div>
 
@@ -117,5 +117,36 @@
           </div>
       </div> 
     </div> 
+    <!-- How Structural Directives works -->
+    <button class="btn btn-notice" (click)="DisplayNotice()" >Show notice</button>
 
+    
+    <!-- Here we have used the structural directive *ngIf, we use a local ref variable to define the template when condition is false-->
+    <!-- this <div> is the view for the ngIf - angular injects this view as the first parameter (TemplateRef) to the constructor of the structural directive.
+    The internally created <ng-template> is the ViewContainer of this div view. Th   -->
+    <div class="info-container notice" *ngIf="display; else myVar">
+    <h3>This is important notice!</h3>
+    <p>This is a notice issued for all website users.</p>
+    </div>
+    <ng-template #myVar>
+        <p>This is an example paragraph.</p>
+    </ng-template>
+    <!-- Below is how angular internally process the structural directive -->
+    <!-- When we specify asterisk * for the structural directive, internally angular creates the template ng-template like below and 
+        wraps the view within it. It use the ngIf like a normal Attribute Directive. -->
+    <ng-template [ngIf]="display" [ngIfElse]="myVar1">
+        <div class="info-container notice">
+            <h3>This is important notice!</h3>
+            <p>This is a notice issued for all website users.</p>
+        </div>
+    </ng-template>
+    <ng-template #myVar1>
+        <p>This is an example paragraph.</p>
+    </ng-template>
+
+    <button class="btn btn-notice" (click)="DisplayNotice()" >Show</button>
+    <div class="info-container notice" *appIf="display">
+        <h3>This is Custom Structural Directive</h3>
+        <p>This is a notice issued for all website users.</p>
+    </div>
 </div>
