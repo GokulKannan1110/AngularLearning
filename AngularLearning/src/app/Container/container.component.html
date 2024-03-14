@@ -149,4 +149,23 @@
         <h3>This is Custom Structural Directive</h3>
         <p>This is a notice issued for all website users.</p>
     </div>
+
+    <!-- ngSwith Directive - ngSwitchCase and  ngSwitchDefault are the ones which manipulate(remove or add) DOM, so * is used only there.  -->
+    <div class="container" [ngSwitch]="occupation">
+        <p *ngSwitchCase="'teacher'">This paragraph will be displayed when occupation is teacher.</p>
+        <p *ngSwitchCase="'designer'">This paragraph will be displayed when occupation is designer.</p>
+        <p *ngSwitchCase="'lawyer'">This paragraph will be displayed when occupation is lawyer.</p>
+        <p *ngSwitchDefault>This paragraph is default and will be displayed if no case matches switch expression</p>
+    </div>
+
+
+    <h4>Services and Dependency Injection</h4>
+    <app-adduser></app-adduser>
+    <div class="user-container">
+        <div class="user-div" *ngFor="let user of users">
+            <div class="user-name">{{user.name}}</div>
+            <div class="user-status">{{user.status}}</div>
+        </div>
+    </div>
+    
 </div>

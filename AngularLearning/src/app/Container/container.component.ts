@@ -1,12 +1,16 @@
-import { AfterViewChecked, AfterViewInit, Component, ElementRef, ViewChild, ChangeDetectorRef } from "@angular/core";
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, ViewChild, ChangeDetectorRef, OnInit } from "@angular/core";
 import { DemoComponent } from "../demo/demo.component";
+import { EnrollService } from "../Services/enroll.service";
+import { UserService } from "../Services/user.service";
 
 @Component({
     selector:'app-container',
     templateUrl :'./container.component.html',
-    styleUrls: ['./container.component.css']
+    styleUrls: ['./container.component.css'],
+    providers: [UserService]
 })
-export class ContainerComponent implements AfterViewInit{
+export class ContainerComponent implements AfterViewInit, OnInit{
+
     //we are passing the local ref variable of the DOB input element to the view child, so this
     //property is assigned with the reference to that input element
     @ViewChild('dobInput') dateOfBirth : ElementRef;
@@ -26,8 +30,14 @@ export class ContainerComponent implements AfterViewInit{
     }
     isDemoComponentReady: boolean = false;
 
-  constructor(private cdr: ChangeDetectorRef) {}
-
+  //constructor(){}
+  constructor(private cdr: ChangeDetectorRef, private enrollService: EnrollService, private userService: UserService) {}
+  
+  users: {name: string, status: string}[] = [];
+  ngOnInit()
+  {
+    this.users = this.userService.users;
+  }
   ngAfterViewInit() {
     this.cdr.detectChanges(); // Manually trigger change detection
     this.isDemoComponentReady = true;
@@ -58,6 +68,7 @@ export class ContainerComponent implements AfterViewInit{
     return videoCopy.sort((curr, next) => next.likes - curr.likes)[0];
   }
 
+  occupation: string = "teacher"; 
   active: boolean = false; 
   display: boolean = false;
   DisplayNotice(){

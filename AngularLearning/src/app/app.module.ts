@@ -22,6 +22,8 @@ import { ClassDirective } from './CustomDirectives/class.directive';
 import { ContainerhighlightDirective } from './CustomDirectives/containerhighlight.directive';
 import { StyleDirective } from './CustomDirectives/style.directive';
 import { IfDirective } from './CustomDirectives/if.directive';
+import { EnrollService } from './Services/enroll.service';
+import { AdduserComponent } from './adduser/adduser.component';
 
 @NgModule({
   declarations: [
@@ -43,14 +45,15 @@ import { IfDirective } from './CustomDirectives/if.directive';
     ClassDirective,
     ContainerhighlightDirective,
     StyleDirective,
-    IfDirective,    
+    IfDirective,
+    AdduserComponent,    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [EnrollService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
