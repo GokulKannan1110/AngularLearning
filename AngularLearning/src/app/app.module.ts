@@ -24,6 +24,9 @@ import { StyleDirective } from './CustomDirectives/style.directive';
 import { IfDirective } from './CustomDirectives/if.directive';
 import { EnrollService } from './Services/enroll.service';
 import { AdduserComponent } from './adduser/adduser.component';
+import { LoggerService } from './Services/logger.service';
+import { AlluserComponent } from './alluser/alluser.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,9 @@ import { AdduserComponent } from './adduser/adduser.component';
     ContainerhighlightDirective,
     StyleDirective,
     IfDirective,
-    AdduserComponent,    
+    AdduserComponent,
+    AlluserComponent,
+    UserDetailComponent,    
   ],
   imports: [
     BrowserModule,

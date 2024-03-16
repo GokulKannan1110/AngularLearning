@@ -7,7 +7,7 @@ export class StyleDirective {
 
   constructor(private element: ElementRef, private renderer: Renderer2) { }
 
-  //When we use setter on property, we can use that property like a method. Internally it is a method, 
+  //When we use setter on property, we can use that property like a method. Internally it is a property, 
   //but we can write logic to set the value for the property 
   @Input() set setStyle(styles: Object){
     let entries =  Object.entries(styles);
