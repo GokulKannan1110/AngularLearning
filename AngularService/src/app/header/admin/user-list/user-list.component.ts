@@ -14,4 +14,9 @@ export class UserListComponent {
   }
 
   users: User[] = this.userService.GetAllUsers();
+
+  ShowUserDetails(user: User)
+  {
+    this.userService.OnShowUserDetails(user);
+  }
 }
