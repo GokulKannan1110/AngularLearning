@@ -20,28 +20,29 @@ import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { FormsModule } from '@angular/forms';
+import { RoutingModule } from './routing.module';
 
 
-//Here, we have defined the routes
-const routes: Routes = [
-  //we can configure the root url to show the home page in two ways
-  //One by mapping with Home component.
-  //Other way is redirecting to Homw page path Url
-  {path:'', component: HomeComponent},
-  //{path:'', redirectTo: 'Home', pathMatch:'full'},  
-  {path:'Home', component: HomeComponent},
-  {path:'About', component: AboutComponent},
-  {path:'Contact', component: ContactComponent},
-  {path:'Courses', component: CoursesComponent},
-  //{path:'Courses/Course/:id', component: CourseDetailComponent},
-  {path: 'Courses', children: [
-    {path: 'Course/:id', component: CourseDetailComponent},
-    {path: 'popular', component: PopularComponent}
-  ] },
-  //WildCard Route which must be specified at the end of all the defined routes.
-  {path:'**', component: NotFoundComponent}
+// //Here, we have defined the routes
+// const routes: Routes = [
+//   //we can configure the root url to show the home page in two ways
+//   //One by mapping with Home component.
+//   //Other way is redirecting to Homw page path Url
+//   {path:'', component: HomeComponent},
+//   //{path:'', redirectTo: 'Home', pathMatch:'full'},  
+//   {path:'Home', component: HomeComponent},
+//   {path:'About', component: AboutComponent},
+//   {path:'Contact', component: ContactComponent},
+//   {path:'Courses', component: CoursesComponent},
+//   //{path:'Courses/Course/:id', component: CourseDetailComponent},
+//   {path: 'Courses', children: [
+//     {path: 'Course/:id', component: CourseDetailComponent},
+//     {path: 'popular', component: PopularComponent}
+//   ] },
+//   //WildCard Route which must be specified at the end of all the defined routes.
+//   {path:'**', component: NotFoundComponent}
 
-]
+// ]
 
 @NgModule({
   declarations: [
@@ -65,8 +66,9 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    RoutingModule
     //Here we are registering the routes
-    RouterModule.forRoot(routes)
+    //RouterModule.forRoot(routes)
   ],
   providers: [ServicesService, CourseService],
   bootstrap: [AppComponent]
