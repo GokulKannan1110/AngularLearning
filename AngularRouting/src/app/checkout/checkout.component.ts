@@ -12,6 +12,13 @@ export class CheckoutComponent implements OnInit {
  router: Router = inject(Router);
  course;
 
+ /**
+  *
+  */
+ constructor() {
+  this.course = this.router.getCurrentNavigation().extras.state;  
+ }
+
  ngOnInit()
  {
   //Accessing static data
@@ -20,8 +27,12 @@ export class CheckoutComponent implements OnInit {
   // })
 
   //In order to access dynamic data, we need ROuter object 
-  // this.course = this.router.getCurrentNavigation().extras.state;
-  this.course = history.state;
+  //Looks like this below code: works inside the constructor but not inside ngOnInit. Why is that ?
+  //it should be called inside the constructor when the router is still in transition and the destination component get initialised.
+  //this.course = this.router.getCurrentNavigation().extras.state;
+  
+  
+  //this.course = history.state;
 
  }
 
