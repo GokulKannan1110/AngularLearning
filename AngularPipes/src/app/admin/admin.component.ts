@@ -12,10 +12,16 @@ export class AdminComponent implements OnInit {
   isEditing: boolean = false;
   isInserting: boolean = false;
   stdIdToEdit: number;
-
+  filterText: string = 'All';
   students: Student[];
   totalMarks: number;
   
+  totalStudents = new Promise((resolve, rejection) => {
+    setTimeout(() => {
+      resolve(this.students.length)
+    }, 2000)
+  });
+
   //PROPERTIES FOR INSERTING
   @ViewChild('name') Name: ElementRef;
   @ViewChild('gender') Gender: ElementRef;
@@ -33,7 +39,7 @@ export class AdminComponent implements OnInit {
   @ViewChild('editFee') editFee: ElementRef;
 
   ngOnInit(){
-    this.students = this.studentService.students;
+    this.students = this.studentService.filterStudentsByGender(this.filterText);
     this.totalMarks = this.studentService.totalMarks;
   }
 
@@ -52,6 +58,8 @@ export class AdminComponent implements OnInit {
       this.Marks.nativeElement.value, 
       this.Fee.nativeElement.value
     );
+    //this.students = this.studentService.students;
+    this.students = this.studentService.filterStudentsByGender(this.filterText);
     this.isInserting = false;
   }
 
@@ -70,7 +78,14 @@ export class AdminComponent implements OnInit {
       student.course = this.editCourse.nativeElement.value; 
       student.marks = this.editMarks.nativeElement.value; 
       student.fee = this.editFee.nativeElement.value;
-
+      this.students = this.studentService.filterStudentsByGender(this.filterText);
       this.isEditing = false;
+  }
+
+  OnFilterChanged(event: any)
+  {
+    let selectedFilter = event.target.value;
+    this.filterText = selectedFilter;
+    this.students = this.studentService.filterStudentsByGender(this.filterText);
   }
 }
