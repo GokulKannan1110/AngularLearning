@@ -1,0 +1,25 @@
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Membership</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    <tr *ngFor="let user of users">
+        <td>{{ user.name}}</td>
+        <td>{{ user.gender}}</td>
+        <td>{{ user.membership}}</td>
+        <td>{{ user.price}}</td>
+        <td>{{ user.isActive ? 'Active' : 'Inactive'}}</td>
+        <td>
+            <button class="delete-button" (click)="OnDeleteClicked(user)">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+        </td>
+    </tr>
+</table>
+<!-- <app-confirm-delete *ngIf="showConfirmDeleteComp" [userToDelete]="userToDelete" (OnConfirmDeleteClicked)="OnClicked($event)"></app-confirm-delete> -->
+
+<div appViewContainer> </div>
