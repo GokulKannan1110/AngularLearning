@@ -9,7 +9,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateTaskComponent } from './dashboard/create-task/create-task.component';
 import { TaskDetailsComponent } from './dashboard/task-details/task-details.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptorService } from './Services/auth-interceptor.service';
+import { LoggingInterceptorService } from './Services/logginginterceptor.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,10 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptorService, multi: true}    
+  ], //when we set multi to true, we can have many interceptors with same injection token and that will not override each other
   bootstrap: [AppComponent]
 })
 export class AppModule { }

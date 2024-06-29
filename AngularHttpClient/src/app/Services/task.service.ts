@@ -18,7 +18,7 @@ export class TaskService {
     
     CreateTask(task: Task){
         const headers = new HttpHeaders({ 'my-header': 'Hello World' })
-        this.http.post<{ name: string }>('https://angularhttpclientssss-9e62b-default-rtdb.firebaseio.com/task.json',
+        this.http.post<{ name: string }>('https://angularhttpclient-9e62b-default-rtdb.firebaseio.com/task.json',
             task, { headers: headers }).subscribe({error: (err) => {
                 this.errorSubject.next(err);
             }});
