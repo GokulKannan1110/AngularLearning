@@ -1,9 +1,10 @@
 import { HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpParams } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Task } from "../Model/Task";
-import { catchError, map, Observable, Subject, Subscription, tap, throwError } from "rxjs";
+import { catchError, exhaustMap, map, Observable, Subject, Subscription, take, tap, throwError } from "rxjs";
 import { LoggingService } from "./Logging.service";
 import { ErrorLog } from "../Model/ErrorLog";
+import { AuthService } from "./auth.service";
 
 @Injectable({
     providedIn: "root"
@@ -15,13 +16,12 @@ export class TaskService {
 
     allTasks: Task[] = [];
     errorSubject: Subject<HttpErrorResponse> = new Subject<HttpErrorResponse>();
-    
-    CreateTask(task: Task){
+    authService: AuthService = inject(AuthService);
+
+    CreateTask(task: Task) : Observable<any>{
         const headers = new HttpHeaders({ 'my-header': 'Hello World' })
-        this.http.post<{ name: string }>('https://angularhttpclient-9e62b-default-rtdb.firebaseio.com/task.json',
-            task, { headers: headers }).subscribe({error: (err) => {
-                this.errorSubject.next(err);
-            }});
+        return this.http.post<{ name: string }>('https://angularhttpclient-9e62b-default-rtdb.firebaseio.com/task.json',
+            task, { headers: headers });
     }
 
     UpdateTask(id: string | undefined, data: Task ): Observable<any>{
@@ -29,20 +29,14 @@ export class TaskService {
         
     }
 
-    DeleteTask(id: string | undefined) {
-        this.http.delete("https://angularhttpclient-9e62b-default-rtdb.firebaseio.com/task/" + id + '.json',{observe: 'events'})
+    DeleteTask(id: string | undefined) : Observable<any> {
+        return this.http.delete("https://angularhttpclient-9e62b-default-rtdb.firebaseio.com/task/" + id + '.json',{observe: 'events'})
             .pipe(tap((event) => {
                 console.log(event);
                 if(event.type === HttpEventType.Response){
 
                 }
-            }))
-            .subscribe({
-                next: (res) => {
-                    console.log(res);
-                    this.FetchAllTasks();
-                }
-            })
+            }));            
     }
 
     DeleteAllTasks() {
@@ -56,16 +50,9 @@ export class TaskService {
     }
 
     FetchAllTasks(): Observable<Task[]> {
-        let headers = new HttpHeaders();
-        headers = headers.set('content-type','application/json');
-        headers = headers.append('content-type','text/xml');
 
-        let queryParams = new HttpParams();
-        queryParams = queryParams.set('page',2);
-        queryParams = queryParams.set('items', 10);
-
-        return this.http.get<{ [key: string]: Task }>('https://angularhttpclient-9e62b-default-rtdb.firebaseio.com/task.json',
-            {headers: headers, params: queryParams}).pipe(map((response) => {
+        return this.http.get<{ [key: string]: Task }>('https://angularhttpclient-9e62b-default-rtdb.firebaseio.com/task.json')
+        .pipe(map((response) => {
             console.log(response);
             //Transforming Data
             let tasks = [];
@@ -75,12 +62,22 @@ export class TaskService {
                 }
             }
             return tasks;
-        }), catchError((err: HttpErrorResponse) => {
+        }),catchError((err: HttpErrorResponse) => {
             //Logging the error to DB
             const errorLog = new ErrorLog(err.status, err.message, new Date())
             this.loggingService.logError(errorLog);
             return throwError(() => err);
-        }))
+        }));
+
+        // let headers = new HttpHeaders();
+        // headers = headers.set('content-type','application/json');
+        // headers = headers.append('content-type','text/xml');
+
+        // let queryParams = new HttpParams();
+        // queryParams = queryParams.set('page',2);
+        // queryParams = queryParams.set('items', 10);
+
+        
     }
 
     FetchSpecificTask(id: string | undefined){

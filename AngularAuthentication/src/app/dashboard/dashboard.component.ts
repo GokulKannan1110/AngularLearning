@@ -63,7 +63,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
       });;
     }
     else {
-      this.taskService.CreateTask(data);
+      this.taskService.CreateTask(data).subscribe({
+        next: (resp) => {
+            if(resp != null)
+            {
+                console.log('createtTask Respone:');
+                console.log(resp);
+                this.FetchAllTasks();
+            }
+        }
+        ,error: (err) => {
+        this.taskService.errorSubject.next(err);
+    }});
     }
 
     //console.log(this.allTasks);
@@ -99,7 +110,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
    * DeleteTask
    */
   public DeleteTask(id: string | undefined) {
-    this.taskService.DeleteTask(id);
+    this.taskService.DeleteTask(id).subscribe({
+      next: (res) => {
+          console.log(res);
+          this.FetchAllTasks();
+      }
+  });
   }
 
   /**

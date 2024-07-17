@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../Services/auth.service';
 import { Observable } from 'rxjs';
 import { AuthResponse } from '../Model/AuthResponse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent {
   isLoading: boolean = false;
   errMessage: string | null = null;
   authObs!: Observable<AuthResponse>;
+  router: Router = inject(Router);
 
   ngOnInit()
   {
@@ -52,6 +54,7 @@ export class LoginComponent {
       next: (res) => {
         console.log(res);
         this.isLoading = false;
+        this.router.navigate(['/dashboard']);
       },
       error: (errMsg) => {        
         this.isLoading = false;
