@@ -3,6 +3,7 @@ import { inject, Injectable } from "@angular/core";
 import { AuthResponse } from "../Model/AuthResponse";
 import { BehaviorSubject, catchError, Subject, tap, throwError } from "rxjs";
 import { User } from "../Model/User";
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,7 @@ import { User } from "../Model/User";
 export class AuthService{
     httpClient: HttpClient = inject(HttpClient);
     userSub = new BehaviorSubject<User | null>(null);
-
+    router: Router = inject(Router);
     
     signup(email: string, password: string){
         //console.log(email);
@@ -44,6 +45,11 @@ export class AuthService{
                     this.handleCreateUser(res);
                 })           
             );
+    }
+
+    logOut(){
+        this.userSub.next(null);
+        this.router.navigate(['/login'])
     }
 
     private handleCreateUser(res: any){
