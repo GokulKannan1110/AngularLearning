@@ -6,7 +6,7 @@ import { canActivate } from '../RouteGuards/authGuard';
 
 
 const routes: Routes = [
-    { path: 'dashboard', canActivate: [canActivate], children: [
+    { path: '', canActivate: [canActivate], children: [
         {path: 'overview', component: OverviewComponent},
         {path: 'stats', component: StatsComponent}
       ] }, 

@@ -8,9 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouteModule } from './route.module';
 import { HomeComponent } from './home/home.component';
-import { DashBoardModule } from './dashboard/dashboard.module';
 import { CoreModule } from './core.module';
-import { AuthModule } from './login/auth.module';
 
 @NgModule({
   declarations: [
@@ -24,9 +22,7 @@ import { AuthModule } from './login/auth.module';
     ReactiveFormsModule,
     HttpClientModule,
     RouteModule,
-    DashBoardModule,
-    CoreModule,
-    AuthModule
+    CoreModule
   ],  
   bootstrap: [AppComponent]
 })
