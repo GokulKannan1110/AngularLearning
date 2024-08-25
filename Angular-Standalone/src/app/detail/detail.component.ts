@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { ActionService } from '../shared/action.service';
-import { SharedModule } from '../shared/shared/shared.module';
 import { HighlightDirective } from '../shared/highlight.directive';
 
 @Component({
