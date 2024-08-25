@@ -1,0 +1,22 @@
+button{
+    height: 55px;
+    width: 100px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 10px;
+    border: medium ridge;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #3498DB;
+    text-align: center;
+}
+ul{
+    padding-left: 10px;
+    margin-left: 10px;
+}
+section{
+    margin: 10px 10px;
+    background-color: #F7F9F9;
+}

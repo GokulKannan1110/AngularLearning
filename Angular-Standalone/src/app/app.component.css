@@ -1,0 +1,27 @@
+nav{
+    display: flex;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background-color: black;          
+}
+nav ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 25%;
+    padding: 0 20px;
+}
+ul{
+    display: flex;
+    list-style: none;
+}
+nav ul li{
+    margin-left: 20px;
+}
+nav ul li a{
+    text-decoration: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: azure;
+    padding: 0;
+    margin: 0;
+}
