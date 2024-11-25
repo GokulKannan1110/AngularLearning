@@ -6,16 +6,20 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { InputComponent } from './input/input.component';
 import { MaterialModule } from './Material.module';
+import { AutocompleteComponent } from './component/autocomplete/autocomplete.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InputComponent
+    InputComponent,
+    AutocompleteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideAnimationsAsync()

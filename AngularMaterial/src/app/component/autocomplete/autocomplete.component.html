@@ -1,0 +1,10 @@
+<p>autocomplete works!</p>
+
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+        <input matInput [matAutocomplete]="auto" [formControl]="formControl">
+        <mat-autocomplete autoActiveFirstOption #auto>
+            <mat-option *ngFor="let i of filterOptionsList | async" [value]="i.code">{{i.code}}-{{i.name}}</mat-option>                   
+        </mat-autocomplete>
+    </mat-form-field>
+</form>
