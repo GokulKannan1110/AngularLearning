@@ -1,0 +1,38 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+    <button mat-icon-button routerLink="">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>AngularMaterial UI</span>
+    <span class="example-spacer"></span>
+    <button mat-button routerLink="">Home</button>
+    <button mat-button [matMenuTriggerFor]="lvl1master">Master</button> 
+    <mat-menu #lvl1master="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="company">Company</button>            
+        <button mat-menu-item [matMenuTriggerFor]="customer">Customer</button>
+        <button mat-menu-item [matMenuTriggerFor]="product">Product</button>
+    </mat-menu>
+    <mat-menu #company="matMenu">
+        <button mat-menu-item>Term</button>            
+        <button mat-menu-item>Tax</button>
+        <button mat-menu-item>Currency</button>
+    </mat-menu>
+    <mat-menu #customer="matMenu">
+        <button mat-menu-item>CustomerType</button>            
+        <button mat-menu-item>Tax</button>        
+    </mat-menu>  
+    <mat-menu #product="matMenu">
+        <button mat-menu-item>Category</button>            
+        <button mat-menu-item [matMenuTriggerFor]="variant">Variant</button>
+        <button mat-menu-item>UOM</button>        
+    </mat-menu>  
+    <mat-menu #variant="matMenu">
+        <button mat-menu-item>Color</button>            
+        <button mat-menu-item>Size</button>        
+    </mat-menu>      
+    <button mat-button routerLink="input">Input</button>
+    <button mat-button routerLink="autocomplete">AutoComplete</button>
+    <button mat-raised-button color="accent">Sign Up</button>
+    <button mat-icon-button>
+        <mat-icon>notifications</mat-icon>
+    </button>
+</mat-toolbar>
