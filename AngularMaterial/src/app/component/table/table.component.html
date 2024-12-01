@@ -1,0 +1,45 @@
+<mat-card>
+    <mat-card-header>
+        <mat-form-field>
+            <input matInput (keyup)="FilterChange($event)" placeholder="Enter any Text">
+        </mat-form-field>
+    </mat-card-header>
+    <mat-card-content>
+        <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z6">
+            <ng-container matColumnDef="code">
+                <th mat-sort-header="" mat-header-cell *matHeaderCellDef>Code</th>
+                <td mat-cell *matCellDef="let element">{{element.code}}</td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-sort-header="" mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let element">{{element.name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef>Email</th>
+                <td mat-cell *matCellDef="let element">{{element.email}}</td>
+            </ng-container>
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef>Phone</th>
+                <td mat-cell *matCellDef="let element">{{element.phone}}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let element">{{element.status}}</td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>Action</th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-raised-button color="primary"><mat-icon>edit</mat-icon> Edit</button>
+                    <button mat-raised-button color="warn"><mat-icon>delete</mat-icon> Delete</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
+        </table>
+    </mat-card-content>
+    <br>
+    <mat-card-footer>
+        <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons="true"></mat-paginator>
+    </mat-card-footer>
+</mat-card>

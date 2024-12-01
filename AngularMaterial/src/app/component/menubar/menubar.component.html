@@ -32,8 +32,8 @@
     <button mat-button routerLink="input">Input</button>
     <button mat-button routerLink="autocomplete">AutoComplete</button>
     <button mat-raised-button color="accent">Sign Up</button>
-    <button (click)="badgeVisibility()" mat-icon-button>
-        <mat-icon matBadge="15" [matBadgeHidden]="badgeVisible" matBadgeColor="accent" matBadgeSize="small">notifications</mat-icon>
+    <button (click)="badgeVisibility();notificationDrawer.toggle()" mat-icon-button>
+        <mat-icon matBadge="5" [matBadgeHidden]="badgeVisible" matBadgeColor="accent" matBadgeSize="small">notifications</mat-icon>
     </button>
 </mat-toolbar>
 <mat-drawer-container >
@@ -43,7 +43,7 @@
                 <button mat-button routerLink="card"><mat-icon>dashboard</mat-icon>Dashboard</button>
             </mat-list-item>
             <mat-list-item>
-                <button mat-button><mat-icon>home</mat-icon>Home</button>
+                <button mat-button routerLink="table"><mat-icon>home</mat-icon>Home</button>
             </mat-list-item>
             <mat-list-item>
                 <button mat-button><mat-icon>settings</mat-icon>Settings</button>
@@ -56,9 +56,30 @@
             </mat-list-item>
         </mat-nav-list>
     </mat-drawer>
+    <mat-drawer #notificationDrawer opened="false" mode="over" position="end">
+        <mat-nav-list>
+            <mat-list-item>
+                <button mat-button>Notification-1</button>
+            </mat-list-item>
+            <mat-list-item>
+                <button mat-button>Notification-2</button>
+            </mat-list-item>
+            <mat-list-item>
+                <button mat-button>Notification-3</button>
+            </mat-list-item>
+            <mat-list-item>
+                <button mat-button>Notification-4</button>
+            </mat-list-item>
+            <mat-list-item>
+                <button mat-button>Notification-5</button>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-drawer>
+    
     <mat-drawer-content>
         <div style="text-align: center; min-height: 800px;">
             <router-outlet></router-outlet>
         </div>        
     </mat-drawer-content>
 </mat-drawer-container>
+
