@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class MenubarComponent {
 
+  badgeVisible =false;
+  badgeVisibility(){
+    this.badgeVisible = true;
+  }
 }

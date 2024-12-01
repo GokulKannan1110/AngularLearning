@@ -7,9 +7,11 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { InputComponent } from './input/input.component';
 import { MaterialModule } from './Material.module';
 import { AutocompleteComponent } from './component/autocomplete/autocomplete.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenubarComponent } from './component/menubar/menubar.component';
 import { HomeComponent } from './component/home/home.component';
+import { CardComponent } from './component/card/card.component';
+import { SliderComponent } from './component/slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -17,13 +19,16 @@ import { HomeComponent } from './component/home/home.component';
     InputComponent,
     AutocompleteComponent,
     MenubarComponent,
-    HomeComponent
+    HomeComponent,
+    CardComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     provideAnimationsAsync()
