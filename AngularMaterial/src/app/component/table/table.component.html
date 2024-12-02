@@ -1,11 +1,13 @@
 <mat-card>
     <mat-card-header>
         <mat-form-field>
-            <input matInput (keyup)="FilterChange($event)" placeholder="Enter any Text">
+            <!-- (keyup)="FilterChange($event)" -->
+            <input matInput  (input)="term$.next($any($event.target).value)" placeholder="Enter any Text">
         </mat-form-field>
+        <button mat-raised-button style="margin-left: 60%;" (click)="OpenAddUserPopup()" color="primary">Add User</button>
     </mat-card-header>
     <mat-card-content>
-        <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z6">
+        <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="code">
                 <th mat-sort-header="" mat-header-cell *matHeaderCellDef>Code</th>
                 <td mat-cell *matCellDef="let element">{{element.code}}</td>
@@ -29,7 +31,7 @@
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef>Action</th>
                 <td mat-cell *matCellDef="let element">
-                    <button mat-raised-button color="primary"><mat-icon>edit</mat-icon> Edit</button>
+                    <button mat-raised-button color="primary" (click)="OpenEditPopup(element.code)"><mat-icon>edit</mat-icon> Edit</button>
                     <button mat-raised-button color="warn"><mat-icon>delete</mat-icon> Delete</button>
                 </td>
             </ng-container>

@@ -24,4 +24,21 @@ export class MasterService {
   GetCustomer(): Observable<Customer[]>{
     return this.httpClient.get<Customer[]>("http://localhost:3000/customer");
   }
+
+  GetCustomerWithSearch(query: string): Observable<Customer[]>{
+    return this.httpClient.get<Customer[]>("http://localhost:3000/customer?name=" + query);
+  }
+
+  GetCustomerByCode(code: any){
+    return this.httpClient.get<Customer[]>("http://localhost:3000/customer?code=" + code);    
+  }
+
+  SaveCustomer(data:any){
+    return this.httpClient.post('http://localhost:3000/customer',data);
+  }
+
+  UpdateCustomer(data:any){
+    console.log('service-', data);
+    return this.httpClient.put('http://localhost:3000/customer/'+data.code, data);
+  }
 }
