@@ -1,35 +1,35 @@
-<form [formGroup]="popupForm"  (ngSubmit)="SaveUser()">
+<form [formGroup]="popupForm" (ngSubmit)="SaveUser()">
     <mat-card class="mat-elevation-z8">
         <mat-card-header>
-        <h1 mat-dialog-title style="text-align: center;">{{inputData.title}}</h1>
-        <span style="margin-left: 70%;"(click)="ClosePopUp()"><mat-icon>close</mat-icon></span>
-    </mat-card-header>
-    <mat-card-content>
-        <div mat-dialog-content>
+            <h1 mat-dialog-title style="text-align: center;">{{inputData.title}}</h1>
+            <span style="margin-left: 70%;" (click)="ClosePopUp()"><mat-icon>close</mat-icon></span>
+        </mat-card-header>
+        <mat-card-content>
+            <div mat-dialog-content>
                 <mat-form-field>
                     <mat-label>Name</mat-label>
                     <input formControlName="name" matInput>
                 </mat-form-field>
-                <mat-form-field >
+                <mat-form-field>
                     <mat-label>Email</mat-label>
                     <input formControlName="email" matInput>
                 </mat-form-field>
-                <mat-form-field >
+                <mat-form-field>
                     <mat-label>Phone</mat-label>
                     <input formControlName="phone" matInput>
                 </mat-form-field>
                 <div>
                     <mat-checkbox formControlName="status">IsActive</mat-checkbox>
                 </div>
-            
-        </div>
-    </mat-card-content>
-    <mat-card-actions>
-        <div mat-dialog-actions>
-            <!-- <button mat-raised-button color="warn" (click)="ClosePopUp()">Close</button> -->
-            <button mat-raised-button color="primary">Save</button>
-            <button mat-raised-button [mat-dialog-close]="closeMessage" color="accent">Cancel</button>
-        </div>
-    </mat-card-actions>
+
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <div mat-dialog-actions>
+                <!-- <button mat-raised-button color="warn" (click)="ClosePopUp()">Close</button> -->
+                <button mat-raised-button color="primary">{{isEdit ? 'Update' : 'Save'}}</button>
+                <button mat-raised-button [mat-dialog-close]="closeMessage" color="accent">Cancel</button>
+            </div>
+        </mat-card-actions>
     </mat-card>
 </form>

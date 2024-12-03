@@ -39,6 +39,6 @@ export class MasterService {
 
   UpdateCustomer(data:any){
     console.log('service-', data);
-    return this.httpClient.put('http://localhost:3000/customer/'+data.code, data);
+    return this.httpClient.put('http://localhost:3000/customer/'+data.id, data);
   }
 }

@@ -14,7 +14,8 @@ export class PopupComponent implements OnInit{
   inputData: any;
   popupForm!: FormGroup;
   editCustomerCode!: number;
-
+  currentMaxId = 0;
+  isEdit = false;
   constructor(private dialogRef: MatDialogRef<PopupComponent>,
      @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
@@ -26,18 +27,15 @@ export class PopupComponent implements OnInit{
     this.inputData = this.data;
     if(this.data != null)
     {
-      switch (this.data.type) {
-        case 'Edit':
-          this.editCustomerCode = this.data.customer.code;    
-          this.BuildEditForm();
-          break;
-        case 'Add':
-          this.BuildAddUserForm();
-          break
-        default:
-          this.ClosePopUp();
-          break;
+      if(this.data.id > 0)
+      {
+        this.isEdit = true;
+        this.BuildEditForm();          
       }
+      else{
+        this.BuildAddUserForm();          
+      }
+      
     }
     
   }
@@ -67,24 +65,45 @@ export class PopupComponent implements OnInit{
   }
 
   SaveUser(){
-    switch (this.data.type) {
-      case 'Edit':
+    console.log(this.data.id);
+      if(this.data.id > 0)
+      {
+        console.log('Edit');
         var editUser = this.popupForm.value;
-        editUser = {code: this.editCustomerCode, ...editUser};
-        console.log(editUser);
-        this.ClosePopUp();
-        break;
-      case 'Add':
-        this.service.SaveCustomer(this.popupForm.value).subscribe({
+        editUser = {id: this.data.id, ...editUser};
+        console.log('edit user:', editUser);
+        this.service.UpdateCustomer(editUser).subscribe({
           next: (data) => {
-            this.ClosePopUp()
+            this.ClosePopUp();
           }
-        });
-        break
-      default:
-        this.ClosePopUp();
-        break;
-    }
+        });    
+      }
+      else{
+        this.service.GetCustomer().subscribe((res) => {
+          var customerList = res;
+          console.log(customerList);
+          this.currentMaxId = Math.max(...customerList.map(user => user.id));
+          if(this.currentMaxId > 0)
+            {
+              var newId = this.currentMaxId+1;
+              var newUser = {id:newId, ...this.popupForm.value};
+              console.log(newUser);
+              this.ClosePopUp();
+              this.service.SaveCustomer(newUser).subscribe({
+                next: (data) => {
+                  this.ClosePopUp()
+                }
+              });  
+            }
+            else
+            {
+              alert('User Creation Failed!');
+              this.ClosePopUp();
+            }
+        });       
+                
+      }
+    
     
   }
 }
