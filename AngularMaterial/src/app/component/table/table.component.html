@@ -32,7 +32,8 @@
                 <th mat-header-cell *matHeaderCellDef>Action</th>
                 <td mat-cell *matCellDef="let element">
                     <button mat-raised-button color="primary" (click)="OpenEditPopup(element.id)"><mat-icon>edit</mat-icon> Edit</button>
-                    <button mat-raised-button color="warn"><mat-icon>delete</mat-icon> Delete</button>
+                    <button mat-raised-button color="warn" (click)="OpenDeletePopup(element.id)"><mat-icon>delete</mat-icon> Delete</button>
+                    <button mat-raised-button color="accent" (click)="OpenDetailsPopup(element.id)"> <mat-icon>info</mat-icon> Details</button>
                 </td>
             </ng-container>
 

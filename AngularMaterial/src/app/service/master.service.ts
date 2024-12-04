@@ -29,8 +29,8 @@ export class MasterService {
     return this.httpClient.get<Customer[]>("http://localhost:3000/customer?name=" + query);
   }
 
-  GetCustomerByCode(code: any){
-    return this.httpClient.get<Customer[]>("http://localhost:3000/customer?code=" + code);    
+  GetCustomerById(id: any){
+    return this.httpClient.get<Customer>("http://localhost:3000/customer/" + id);    
   }
 
   SaveCustomer(data:any){
@@ -40,5 +40,9 @@ export class MasterService {
   UpdateCustomer(data:any){
     console.log('service-', data);
     return this.httpClient.put('http://localhost:3000/customer/'+data.id, data);
+  }
+
+  DeleteCustomer(id:any){
+    return this.httpClient.delete('http://localhost:3000/customer/'+id);
   }
 }

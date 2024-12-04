@@ -1,11 +1,11 @@
-<form [formGroup]="popupForm" (ngSubmit)="SaveUser()">
+<form [formGroup]="popupForm" (ngSubmit)="SaveUser()" *ngIf="!isDelete">
     <mat-card class="mat-elevation-z8">
         <mat-card-header>
             <h1 mat-dialog-title style="text-align: center;">{{inputData.title}}</h1>
-            <span style="margin-left: 70%;" (click)="ClosePopUp()"><mat-icon>close</mat-icon></span>
+            <span class="close-icon" (click)="ClosePopUp()"><mat-icon>close</mat-icon></span>
         </mat-card-header>
         <mat-card-content>
-            <div mat-dialog-content>
+            <div mat-dialog-content *ngIf="!isDelete">
                 <mat-form-field>
                     <mat-label>Name</mat-label>
                     <input formControlName="name" matInput>
@@ -22,14 +22,31 @@
                     <mat-checkbox formControlName="status">IsActive</mat-checkbox>
                 </div>
 
-            </div>
+            </div>            
         </mat-card-content>
         <mat-card-actions>
             <div mat-dialog-actions>
                 <!-- <button mat-raised-button color="warn" (click)="ClosePopUp()">Close</button> -->
-                <button mat-raised-button color="primary">{{isEdit ? 'Update' : 'Save'}}</button>
+                <button mat-raised-button color="primary">{{isEdit ? 'Update' : (isDelete ? 'Delete' : 'Save')}}</button>
                 <button mat-raised-button [mat-dialog-close]="closeMessage" color="accent">Cancel</button>
             </div>
         </mat-card-actions>
     </mat-card>
 </form>
+<mat-card class="mat-elevation-z8">
+    <mat-card-header>
+        <h1 mat-dialog-title style="text-align: center;">{{inputData.title}}</h1>
+        <span class="close-icon" (click)="ClosePopUp()"><mat-icon>close</mat-icon></span>
+    </mat-card-header>
+    <mat-card-content>
+        <div mat-dialog-content>
+            Are you Sure to delete the User?
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <div mat-dialog-actions>
+            <button mat-raised-button color="primary" (click)="DeleteUser()" >{{(isDelete ? 'Delete' : 'Save')}}</button>
+            <button mat-raised-button [mat-dialog-close]="closeMessage" color="accent">Cancel</button>
+        </div>
+    </mat-card-actions>
+</mat-card>

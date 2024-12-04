@@ -7,6 +7,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '../popup/popup.component';
 import { BehaviorSubject, catchError, debounceTime, distinctUntilChanged, map, merge, of, startWith, switchMap } from 'rxjs';
+import { ComponentType } from '@angular/cdk/portal';
+import { UserdetailsComponent } from '../userdetails/userdetails.component';
 
 @Component({
   selector: 'app-table',
@@ -93,38 +95,57 @@ export class TableComponent implements AfterViewInit {
     this.dataSource.filter = value;
   }
 
+  OpenAddUserPopup() {    
+    var data = {
+      id: 0,
+      title: 'Add User'
+    }
+    this.OpenPopup(PopupComponent, data);
+  }
+
   OpenEditPopup(userId: number) {
-    var editCustomer = this.customerList.find(x => x.id == userId);
-    var _popUp = this.dialog.open(PopupComponent, {
-      width: '50%',
-      enterAnimationDuration: '1000ms',
-      exitAnimationDuration: '1000ms',
-      data: {
+    var editCustomer = this.customerList.find(x => x.id == userId);    
+    var data = {
         id: editCustomer?.id,
         title: 'User Edit',
-        customer: editCustomer
+        customer: editCustomer,
+        isDelete: false
       }
-    });
-    _popUp.afterClosed().subscribe(item => {
-      console.log(item);
-      this.getCustomerData();
-    })
-
+    this.OpenPopup(PopupComponent, data);
+  }
+ 
+  OpenDeletePopup(userId: number) {
+    var editCustomer = this.customerList.find(x => x.id == userId);    
+    var data = {
+        id: editCustomer?.id,
+        title: 'Delete User',
+        isDelete: true        
+      }
+    this.OpenPopup(PopupComponent, data);
   }
 
-  OpenAddUserPopup() {
-    var _popUp = this.dialog.open(PopupComponent, {
+  OpenDetailsPopup(userId: number)
+  {
+    var data = {
+      id: userId,
+      title: 'User Details'
+    }
+    this.OpenPopup(UserdetailsComponent, data);
+  }
+
+  OpenPopup(component: any, data: any){
+    var _popUp = this.dialog.open(component, {
       width: '50%',
       enterAnimationDuration: '1000ms',
       exitAnimationDuration: '1000ms',
-      data: {
-        id: 0,
-        title: 'Add User'
-      }
+      data: data
     });
     _popUp.afterClosed().subscribe(item => {
       console.log(item);
       this.getCustomerData();
     })
   }
+
+     
+    
 }

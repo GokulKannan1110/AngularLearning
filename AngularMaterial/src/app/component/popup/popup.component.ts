@@ -16,6 +16,8 @@ export class PopupComponent implements OnInit{
   editCustomerCode!: number;
   currentMaxId = 0;
   isEdit = false;
+  isDelete = false;
+
   constructor(private dialogRef: MatDialogRef<PopupComponent>,
      @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
@@ -29,8 +31,13 @@ export class PopupComponent implements OnInit{
     {
       if(this.data.id > 0)
       {
-        this.isEdit = true;
-        this.BuildEditForm();          
+        if (this.data.isDelete) {
+          this.isDelete = this.data.isDelete;
+        }
+        else{
+          this.isEdit = true;
+          this.BuildEditForm();   
+        }             
       }
       else{
         this.BuildAddUserForm();          
@@ -68,15 +75,15 @@ export class PopupComponent implements OnInit{
     console.log(this.data.id);
       if(this.data.id > 0)
       {
-        console.log('Edit');
+        
         var editUser = this.popupForm.value;
-        editUser = {id: this.data.id, ...editUser};
-        console.log('edit user:', editUser);
-        this.service.UpdateCustomer(editUser).subscribe({
-          next: (data) => {
-            this.ClosePopUp();
-          }
-        });    
+          editUser = {id: this.data.id, ...editUser};
+          console.log('edit user:', editUser);
+          this.service.UpdateCustomer(editUser).subscribe({
+            next: (data) => {
+              this.ClosePopUp();
+            }
+          }); 
       }
       else{
         this.service.GetCustomer().subscribe((res) => {
@@ -105,5 +112,16 @@ export class PopupComponent implements OnInit{
       }
     
     
+  }
+
+  DeleteUser(){
+    if(this.isDelete)
+      {
+        this.service.DeleteCustomer(this.data.id).subscribe({
+          next: () =>{
+            this.ClosePopUp();
+          }
+        });
+      }
   }
 }

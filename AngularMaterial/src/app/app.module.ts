@@ -16,6 +16,7 @@ import { TableComponent } from './component/table/table.component';
 import { provideHttpClient } from '@angular/common/http';
 import { FormdesignComponent } from './component/formdesign/formdesign.component';
 import { PopupComponent } from './component/popup/popup.component';
+import { UserdetailsComponent } from './component/userdetails/userdetails.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PopupComponent } from './component/popup/popup.component';
     SliderComponent,
     TableComponent,
     FormdesignComponent,
-    PopupComponent
+    PopupComponent,
+    UserdetailsComponent
   ],
   imports: [
     BrowserModule,

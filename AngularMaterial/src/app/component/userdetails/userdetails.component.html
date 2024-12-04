@@ -1,0 +1,20 @@
+    <mat-card class="mat-elevation-z8">
+        <mat-card-header>
+            <h1 mat-dialog-title style="text-align: center;">{{inputData.title}}</h1>
+            <span style="margin-left: 70%;" (click)="ClosePopUp()"><mat-icon>close</mat-icon></span>
+        </mat-card-header>
+        <mat-card-content>
+            <div mat-dialog-content>
+                <h2>Customer Name : <b>{{customerData.name}}</b></h2>
+                <h2>Customer Email : <b>{{customerData.email}}</b></h2>
+                <h2>Customer Phone : <b>{{customerData.phone}}</b></h2>
+                <h2>Customer Status : <b>{{customerData.status}}</b></h2>                
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <div mat-dialog-actions>
+                <!-- <button mat-raised-button color="warn" (click)="ClosePopUp()">Close</button> -->
+                <button mat-raised-button [mat-dialog-close]="" color="accent">Cancel</button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
